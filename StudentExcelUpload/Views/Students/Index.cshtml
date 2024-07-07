@@ -1,0 +1,132 @@
+﻿@*@model IEnumerable<StudentExcelUpload.Models.Student>
+
+    @{
+        ViewBag.Title = "Index";
+    }
+
+    <h2>Index</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StudentName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateOfBirth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Department)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GraduationYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Backlogs)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CGPA)
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StudentName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfBirth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Department)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GraduationYear)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Backlogs)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CGPA)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            </td>
+        </tr>
+    }
+
+    </table>*@
+
+
+
+
+
+
+@model IEnumerable<StudentExcelUpload.Models.Student>
+
+@{
+    ViewBag.Title = "Student List";
+}
+
+<h2>Student List</h2>
+
+<div>
+    @using (Html.BeginForm("Index", "Students", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <input type="file" name="file" />
+        <button type="submit">Upload</button>
+    }
+</div>
+
+
+<div>
+    @Html.ActionLink("Export to Excel", "ExportToExcel", "Students", new { }, new { @class = "btn btn-primary" })
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>S.No</th>
+            <th>Student Name</th>
+            <th>Last Name</th>
+            <th>Date of Birth</th>
+            <th>Department</th>
+            <th>Graduation Year</th>
+            <th>Backlogs</th>
+            <th>CGPA</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var student in Model)
+        {
+            <tr>
+                <td>@student.SNo</td>
+                <td>@student.StudentName</td>
+                <td>@student.LastName</td>
+                <td>@student.DateOfBirth.ToString("yyyy-MM-dd")</td>
+                <td>@student.Department</td>
+                <td>@student.GraduationYear</td>
+                <td>@student.Backlogs</td>
+                <td>@student.CGPA</td>
+            </tr>
+        }
+    </tbody>
+</table>
